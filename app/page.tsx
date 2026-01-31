@@ -117,8 +117,7 @@ const applicationChartConfig = {
 } satisfies ChartConfig;
 
 export default async function Home() {
-  const jobs = await getJobs();
-  const jobsData = await jobs.json();
+  const jobsData = await getJobs();
 
   return (
     <div className={styles.mainContainer}>
@@ -151,27 +150,27 @@ export default async function Home() {
       </Card>
 
       <div className={styles.mainContainerContent}>
-        <PieChartCard data={jobsData.data.applicationData} chartConfig={applicationChartConfig} title="Applications" />
+        <PieChartCard data={jobsData.applicationData} chartConfig={applicationChartConfig} title="Applications" />
         <TopSectionCard
           title="Companies Interviewed"
-          value={jobsData.data.companiesInterviewedCount.toString()}
-          footerText={`${jobsData.data.companiesInterviewedPercentage}% response rate`}
+          value={jobsData.companiesInterviewedCount.toString()}
+          footerText={`${jobsData.companiesInterviewedPercentage}% response rate`}
         />
         <TopSectionCard
           title="Total Interview Sessions"
-          value={jobsData.data.applicationSessionsAmount.toString()}
-          footerText={`Approx. ${jobsData.data.applicationSessionsTotalHours} hours spent interviewing`}
+          value={jobsData.applicationSessionsAmount.toString()}
+          footerText={`Approx. ${jobsData.applicationSessionsTotalHours} hours spent interviewing`}
         />
 
         <TopSectionCard
           title="Company Ghost Rate"
-          value={`${jobsData.data.companyGhostRate}%`}
-          footerText={`${jobsData.data.companyGhostAmount} rejections without response`}
+          value={`${jobsData.companyGhostRate}%`}
+          footerText={`${jobsData.companyGhostAmount} rejections without response`}
         />
 
         <TopSectionCard
           title="Estimated Hours Spent On Ghosted Applications"
-          value={`${jobsData.data.companyGhostEstimatedHours} hours`}
+          value={`${jobsData.companyGhostEstimatedHours} hours`}
           footerText={
             <>
               Avg time per job app is around 23 minutes{' '}
@@ -189,34 +188,34 @@ export default async function Home() {
 
         <TopSectionCard
           title="Average Interview Cycle Length"
-          value={`${jobsData.data.averageInterviewCycleLength} days`}
+          value={`${jobsData.averageInterviewCycleLength} days`}
           footerText={`From app to interviews to rejection`}
         />
 
         <TopSectionCard
           title="Avg Auto-Rejection Response Time"
-          value={`${jobsData.data.averageAutoRejectionResponseTime} days`}
+          value={`${jobsData.averageAutoRejectionResponseTime} days`}
           footerText={`From app to rejection with no interviews`}
         />
 
         <TopSectionCard
           title="Holiday Rejections"
-          value={`${jobsData.data.holidayRejections}`}
+          value={`${jobsData.holidayRejections}`}
           footerText={`Application rejections received on a holiday`}
         />
       </div>
 
-      <ChartAreaInteractive data={jobsData.data.applicationDataOverTime} chartConfig={applicationChartConfig} />
+      <ChartAreaInteractive data={jobsData.applicationDataOverTime} chartConfig={applicationChartConfig} />
 
       <div className={styles.mainBarCharts}>
         <ChartBarMixed
-          data={jobsData.data.applicationSessions}
+          data={jobsData.applicationSessions}
           chartConfig={applicationChartConfig}
           title="Interview Volume by Stage"
         />
 
         <ChartBarMixed
-          data={jobsData.data.applicationSessionTimes}
+          data={jobsData.applicationSessionTimes}
           chartConfig={applicationChartConfig}
           title="Hours Per Interview Stage"
           tooltipSuffix="hours"

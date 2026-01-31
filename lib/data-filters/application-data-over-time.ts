@@ -31,13 +31,13 @@ export function getApplicationDataOverTime(applications: Application[]) {
 
   const chartAreaInteractiveData: Array<{
     date: string;
-    applied?: number;
-    ghosted?: number;
-    notSelected?: number;
-    cancelled?: number;
-    applicationRescinded?: number;
-    offerRescinded?: number;
-    interviews?: number;
+    applied: number;
+    ghosted: number;
+    notSelected: number;
+    cancelled: number;
+    applicationRescinded: number;
+    offerRescinded: number;
+    interviews: number;
   }> = [];
 
   if (earliestAppliedDate) {
