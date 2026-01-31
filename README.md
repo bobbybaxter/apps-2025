@@ -2,6 +2,10 @@
 
 A comprehensive, data-driven dashboard tracking job search metrics and interview performance. Built to demonstrate technical skills and provide transparency into the job search process.
 
+**Website**: [Bob Baxter Job Search Dashboard](https://bob-baxter-job-search-dashboard.vercel.app/)
+
+![Image of dashboard site](./Screenshot_2026-01-31.png)
+
 ## Overview
 
 This project is a real-time analytics dashboard that visualizes job application data, interview metrics, and hiring pipeline statistics. It was built during a period of active job searching to track progress, identify patterns, and answer the common interview question: "What have you been doing with your time?"
@@ -12,7 +16,9 @@ The dashboard pulls data from a Google Sheets spreadsheet and presents it throug
 
 ### Metrics Tracked
 
-- **Application Statistics**: Total applications, breakdown by status (applied, ghosted, not selected, etc.)
+- **Application Statistics**:
+  - Total applications
+  - Breakdown by status (applied, ghosted, not selected, etc.)
 - **Interview Analytics**:
   - Companies interviewed count and response rates
   - Total interview sessions and hours invested
@@ -23,7 +29,6 @@ The dashboard pulls data from a Google Sheets spreadsheet and presents it throug
   - Company ghost rate
   - Estimated time spent on ghosted applications
 - **Temporal Analysis**: Application and outcome trends over time
-- **Salary Analysis**: Salary range breakdowns by level (Junior, Mid-level, Senior)
 
 ### Visualizations
 
@@ -74,7 +79,6 @@ The application follows a clean separation of concerns:
 - **Type Safety**: Full TypeScript coverage with custom types for application data
 - **Responsive Design**: Container queries and responsive breakpoints for optimal viewing on all devices
 - **Performance**: Memoization and efficient re-rendering strategies
-- **Accessibility**: ARIA labels, semantic HTML, and keyboard navigation support
 
 ## Project Structure
 
@@ -101,7 +105,7 @@ apps-2025/
 └── type.d.ts              # TypeScript type definitions
 ```
 
-## Getting Started
+## How to Run the Project on Your Own Machine
 
 ### Prerequisites
 
@@ -131,10 +135,20 @@ pnpm install
 3. Set up Google Sheets API credentials:
    - Create a Google Cloud service account
    - Download the JSON credentials file
-   - Place it in the project root as `google-sheets-service-account.json`
-   - Share your Google Sheet with the service account email
+   - Extract the `client_email` and `private_key` from the JSON file
+   - Copy `.env.example` to `.env` and fill in your credentials:
+     ```bash
+     cp .env.example .env
+     ```
 
-4. Update the Google Sheet ID in `app/api/jobs/route.ts`:
+**Important Notes:**
+
+- The `private_key` should include the `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----` markers
+- Replace `\n` with actual newlines in the private key, or keep them as `\n` (the code handles both)
+- Share your Google Sheet with the service account email address
+- The `.env` file is already in `.gitignore` and will not be committed to version control
+
+1. Update the Google Sheet ID in `app/api/jobs/route.ts`:
 
 ```typescript
 const doc = new GoogleSpreadsheet('YOUR_SHEET_ID', jwt);
@@ -152,6 +166,13 @@ pnpm dev
 
 6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+### Environment Variables for Production
+
+For production deployments (e.g., Vercel), set the environment variables in your deployment platform's settings:
+
+- `CLIENT_EMAIL`: Your Google Cloud service account email
+- `PRIVATE_KEY`: Your service account private key (with newlines preserved or as `\n`)
+
 ### Building for Production
 
 ```bash
@@ -159,58 +180,9 @@ npm run build
 npm start
 ```
 
-## Key Metrics & Calculations
-
-The dashboard calculates several meaningful metrics:
-
-- **Response Rate**: Percentage of applications that resulted in interviews
-- **Ghost Rate**: Percentage of applications that received no response
-- **Interview Cycle Length**: Average days from application to final decision
-- **Time Investment**: Calculated hours spent on interviews and applications
-- **Salary Analysis**: Quartile analysis of salary ranges by experience level
-
-## What This Demonstrates
-
-### Technical Skills
-
-- **Full-Stack Development**: End-to-end application from data source to UI
-- **Data Processing**: Complex calculations and aggregations from raw data
-- **API Integration**: Google Sheets API integration with authentication
-- **Data Visualization**: Multiple chart types with interactive features
-- **Responsive Design**: Mobile-first approach with container queries
-- **Type Safety**: Comprehensive TypeScript usage
-- **Code Organization**: Modular, maintainable architecture
-
-### Professional Skills
-
-- **Problem-Solving**: Built a solution to track and analyze job search data
-- **Attention to Detail**: Comprehensive metrics and data validation
-- **User Experience**: Intuitive interface with clear visualizations
-- **Documentation**: Clean code with clear structure
-
-## Future Enhancements
-
-Potential improvements for the project:
-
-- [ ] Export functionality for reports
-- [ ] Date range filtering
-- [ ] Additional chart types (scatter plots, heatmaps)
-- [ ] Comparison views (month-over-month, year-over-year)
-- [ ] Data export to CSV/PDF
-- [ ] Automated data validation and error handling
-- [ ] Dark mode support
-
-## License
-
-This project is private and for demonstration purposes.
-
 ## Contact
 
 **Bob Baxter**
 
 - LinkedIn: [bob-e-baxter](https://www.linkedin.com/in/bob-e-baxter/)
 - GitHub: [bobbybaxter](https://github.com/bobbybaxter)
-
----
-
-_Built with Next.js, React, TypeScript, and Recharts_
