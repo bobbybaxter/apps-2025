@@ -11,15 +11,7 @@ import prettierConfig from './.prettierrc.mjs';
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-    'public/**',
-  ]),
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'public/**']),
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
@@ -40,9 +32,9 @@ const eslintConfig = defineConfig([
       'import/newline-after-import': 'error',
       'import/no-duplicates': 'error',
       'prettier/prettier': ['error', prettierConfig],
+      '@eslint/no-unused-vars': 'off',
     },
   },
-  // Prettier config must be last to disable conflicting ESLint rules
   prettier,
 ]);
 
