@@ -1,0 +1,28 @@
+export type Application = {
+  firstContact: string;
+  applied: string;
+  out: string;
+  ghostDate: string;
+  level: string;
+  position: string;
+  company: string;
+  payMin: string;
+  payMax: string;
+  decision: string;
+  notes: string | null;
+  appType: string;
+  type: string;
+  recruiterScreen: string | null;
+  managerScreen: string | null;
+  techInterview1: string | null;
+  techInterview2: string | null;
+  panel: string | null;
+  ceo: string | null;
+  offer: string | null;
+  recruiterScreenTime: string | null;
+  managerScreenTime: string | null;
+  techInterview1Time: string | null;
+  techInterview2Time: string | null;
+  panelTime: string | null;
+  ceoTime: string | null;
+};

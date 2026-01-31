@@ -1,52 +1,227 @@
-import Image from 'next/image';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getJobs } from '@/app/api/jobs/route';
+import { ChartBarMixed } from '@/components/bar-chart-mixed';
+import { ChartAreaInteractive } from '@/components/chart-area-interactive';
+import PieChartCard from '@/components/pie-chart-card';
+import TopSectionCard from '@/components/top-section-card';
+import { Card, CardDescription, CardHeader } from '@/components/ui/card';
+import { type ChartConfig } from '@/components/ui/chart';
+import { formatJobSearchDateString } from '@/lib/utils';
 
-export default function Home() {
+const jobSearchStartDate = new Date('2025-07-15');
+const jobSearchDateString = formatJobSearchDateString(jobSearchStartDate);
+
+const styles = {
+  mainContainer: ['@container/main', 'flex', 'flex-col', 'gap-4', 'p-6'].join(' '),
+  mainContainerContent: [
+    'flex',
+    'flex-row',
+    'flex-wrap',
+    'content-center',
+    'gap-4',
+    'md:gap-6',
+    'justify-between',
+  ].join(' '),
+  mainBarCharts: [
+    'flex',
+    'flex-row',
+    'flex-wrap',
+    'content-center',
+    'gap-4',
+    'md:gap-6',
+    '[&>*]:w-full',
+    'min-[581px]:[&>*]:w-[calc(50%-8px)]',
+    'min-[581px]:flex-nowrap',
+    'md:[&>*]:w-[calc(50%-12px)]',
+  ].join(' '),
+};
+
+const applicationChartConfig = {
+  applications: {
+    label: 'Applications',
+    color: 'var(--color-blue-900)',
+  },
+  recruiterScreen: {
+    label: 'Recruiter Screens',
+    color: 'var(--color-blue-800)',
+  },
+  managerScreen: {
+    label: 'Manager Screens',
+    color: 'var(--color-blue-700)',
+  },
+  techInterview1: {
+    label: 'Tech Interview 1',
+    color: 'var(--color-blue-600)',
+  },
+  techInterview2: {
+    label: 'Tech Interview 2',
+    color: 'var(--color-blue-500)',
+  },
+  techInterviews: {
+    label: 'Tech Interviews',
+    color: 'var(--color-blue-600)',
+  },
+  panel: {
+    label: 'Panels',
+    color: 'var(--color-blue-400)',
+  },
+  ceo: {
+    label: 'CEO Interviews',
+    color: 'var(--color-blue-300)',
+  },
+  applied: {
+    label: 'Applied',
+    color: 'var(--color-blue-900)',
+  },
+  finalRounds: {
+    label: 'Final Rounds',
+    color: 'var(--color-blue-500)',
+  },
+  offer: {
+    label: 'Offer',
+    color: 'var(--color-blue-400)',
+  },
+  ghosted: {
+    label: 'Ghosted',
+    color: 'var(--color-blue-700)',
+  },
+  notSelected: {
+    label: 'Not Selected',
+    color: 'var(--color-blue-500)',
+  },
+  interviews: {
+    label: 'Interviews',
+    color: 'var(--color-blue-300)',
+  },
+  interviewing: {
+    label: 'Interviewing',
+    color: 'var(--color-blue-300)',
+  },
+  pending: {
+    label: 'Pending',
+    color: 'var(--color-blue-200)',
+  },
+  cancelled: {
+    label: 'Cancelled',
+    color: 'var(--color-blue-600)',
+  },
+  applicationRescinded: {
+    label: 'Application Rescinded',
+    color: 'var(--color-blue-700)',
+  },
+  offerRescinded: {
+    label: 'Offer Rescinded',
+    color: 'var(--color-blue-800)',
+  },
+} satisfies ChartConfig;
+
+export default async function Home() {
+  const jobs = await getJobs();
+  const jobsData = await jobs.json();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={100} height={20} priority />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{' '}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{' '}
-            or the{' '}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{' '}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image className="dark:invert" src="/vercel.svg" alt="Vercel logomark" width={16} height={16} />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className={styles.mainContainer}>
+      <Card className="w-full">
+        <CardHeader>
+          <CardDescription className="p-2">
+            <p>
+              Welcome.
+              <br />
+              <br />
+              I've been laid off for {jobSearchDateString}. During this time, job searching has become my full-time job.
+              <br />
+              <br />
+              I've been asked by many interviewers what I've done with my "free time," so I've created this dashboard to
+              better answer that question.
+              <br />
+              <br />
+              Bob Baxter
+            </p>
+            <div className="flex flex-row gap-2">
+              <a href="https://www.linkedin.com/in/bob-e-baxter/" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faLinkedin} size="xl" />
+              </a>
+              <a href="https://github.com/bobbybaxter" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faGithub} size="xl" />
+              </a>
+            </div>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+
+      <div className={styles.mainContainerContent}>
+        <PieChartCard data={jobsData.data.applicationData} chartConfig={applicationChartConfig} title="Applications" />
+        <TopSectionCard
+          title="Companies Interviewed"
+          value={jobsData.data.companiesInterviewedCount.toString()}
+          footerText={`${jobsData.data.companiesInterviewedPercentage}% response rate`}
+        />
+        <TopSectionCard
+          title="Total Interview Sessions"
+          value={jobsData.data.applicationSessionsAmount.toString()}
+          footerText={`Approx. ${jobsData.data.applicationSessionsTotalHours} hours spent interviewing`}
+        />
+
+        <TopSectionCard
+          title="Company Ghost Rate"
+          value={`${jobsData.data.companyGhostRate}%`}
+          footerText={`${jobsData.data.companyGhostAmount} rejections without response`}
+        />
+
+        <TopSectionCard
+          title="Estimated Hours Spent On Ghosted Applications"
+          value={`${jobsData.data.companyGhostEstimatedHours} hours`}
+          footerText={
+            <>
+              Avg time per job app is around 23 minutes{' '}
+              <a
+                href="https://www.linkedin.com/pulse/job-application-process-facts-figures-albert-robescu-ewq7e/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                (source)
+              </a>
+            </>
+          }
+        />
+
+        <TopSectionCard
+          title="Average Interview Cycle Length"
+          value={`${jobsData.data.averageInterviewCycleLength} days`}
+          footerText={`From app to interviews to rejection`}
+        />
+
+        <TopSectionCard
+          title="Avg Auto-Rejection Response Time"
+          value={`${jobsData.data.averageAutoRejectionResponseTime} days`}
+          footerText={`From app to rejection with no interviews`}
+        />
+
+        <TopSectionCard
+          title="Holiday Rejections"
+          value={`${jobsData.data.holidayRejections}`}
+          footerText={`Application rejections received on a holiday`}
+        />
+      </div>
+
+      <ChartAreaInteractive data={jobsData.data.applicationDataOverTime} chartConfig={applicationChartConfig} />
+
+      <div className={styles.mainBarCharts}>
+        <ChartBarMixed
+          data={jobsData.data.applicationSessions}
+          chartConfig={applicationChartConfig}
+          title="Interview Volume by Stage"
+        />
+
+        <ChartBarMixed
+          data={jobsData.data.applicationSessionTimes}
+          chartConfig={applicationChartConfig}
+          title="Hours Per Interview Stage"
+          tooltipSuffix="hours"
+        />
+      </div>
     </div>
   );
 }
