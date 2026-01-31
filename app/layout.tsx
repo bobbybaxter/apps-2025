@@ -17,8 +17,19 @@ const robotoMono = Roboto_Mono({
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: 'Apps 2025',
-  description: 'Application stats for 2025 layoff',
+  title: 'Job Search Analytics Dashboard | Bob Baxter',
+  description: 'A comprehensive, data-driven dashboard tracking job search metrics, interview performance, and hiring pipeline statistics. Built to demonstrate technical skills and provide transparency into the job search process.',
+  keywords: ['job search', 'analytics', 'dashboard', 'interview metrics', 'job applications', 'data visualization'],
+  openGraph: {
+    title: 'Job Search Analytics Dashboard | Bob Baxter',
+    description: 'A comprehensive, data-driven dashboard tracking job search metrics and interview performance.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Job Search Analytics Dashboard | Bob Baxter',
+    description: 'A comprehensive, data-driven dashboard tracking job search metrics and interview performance.',
+  },
 };
 
 export default function RootLayout({
