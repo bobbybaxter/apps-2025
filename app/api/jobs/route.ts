@@ -15,9 +15,13 @@ import {
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file'];
 
 export async function getJobs() {
+  if (!process.env.CLIENT_EMAIL || !process.env.PRIVATE_KEY) {
+    throw new Error('Missing required environment variables: CLIENT_EMAIL and PRIVATE_KEY');
+  }
+
   const jwt = new JWT({
-    email: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
-    key: process.env.NEXT_PUBLIC_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    email: process.env.CLIENT_EMAIL,
+    key: process.env.PRIVATE_KEY?.replace(/\\n/g, '\n'),
     scopes: SCOPES,
   });
 
