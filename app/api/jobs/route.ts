@@ -11,14 +11,13 @@ import {
   getHolidayRejections,
   parseGoogleSheet,
 } from '@/lib/data-filters';
-import creds from '../../../google-sheets-service-account.json';
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive.file'];
 
 export async function getJobs() {
   const jwt = new JWT({
-    email: creds.client_email,
-    key: creds.private_key,
+    email: process.env.NEXT_PUBLIC_CLIENT_EMAIL,
+    key: process.env.NEXT_PUBLIC_PRIVATE_KEY?.replace(/\\n/g, '\n'),
     scopes: SCOPES,
   });
 

@@ -29,7 +29,7 @@ export default function PieChartCard({
         <CardContent>
           <ChartContainer
             config={chartConfig}
-            className="mx-auto aspect-square max-h-[150px] min-[400px]:max-h-[167px]"
+            className="mx-auto aspect-square h-[150px] w-[150px] min-[400px]:h-[167px] min-[400px]:w-[167px]"
           >
             <PieChart>
               <ChartTooltip
