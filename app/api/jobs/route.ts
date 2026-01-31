@@ -51,5 +51,10 @@ export async function getJobs() {
     holidayRejections,
   };
 
-  return Response.json({ data: compiledData });
+  return compiledData;
+}
+
+export async function GET() {
+  const data = await getJobs();
+  return Response.json({ data });
 }
