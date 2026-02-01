@@ -10,7 +10,6 @@ import { type ChartConfig } from '@/components/ui/chart';
 import { formatJobSearchDateString } from '@/lib/utils';
 
 const jobSearchStartDate = new Date('2025-07-15');
-const jobSearchDateString = formatJobSearchDateString(jobSearchStartDate);
 
 const styles = {
   mainContainer: ['@container/main', 'flex', 'flex-col', 'gap-4', 'p-6'].join(' '),
@@ -118,6 +117,7 @@ const applicationChartConfig = {
 
 export default async function Home() {
   const jobsData = await getJobs();
+  const jobSearchDateString = formatJobSearchDateString(jobSearchStartDate);
 
   return (
     <div className={styles.mainContainer}>
