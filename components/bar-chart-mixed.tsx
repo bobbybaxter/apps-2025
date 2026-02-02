@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Bar, BarChart, XAxis, YAxis } from 'recharts';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
 const styles = {
@@ -22,7 +22,7 @@ export function ChartBarMixed({
   description,
   tooltipSuffix,
 }: {
-  data: any;
+  data: Array<Record<string, string | number>>;
   chartConfig: ChartConfig;
   title: string;
   description?: string;
@@ -134,16 +134,10 @@ export function ChartBarMixed({
                   />
                 )}
               />
-              <Bar dataKey="value" radius={5} fill={data.fill} barSize={15} />
+              <Bar dataKey="value" radius={5} barSize={15} />
             </BarChart>
           </ChartContainer>
         </CardContent>
-        {/* <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">Showing total visitors for the last 6 months</div>
-      </CardFooter> */}
       </Card>
     </div>
   );

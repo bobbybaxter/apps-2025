@@ -1,5 +1,6 @@
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import { getJobs } from '@/app/api/jobs/route';
 import { ChartBarMixed } from '@/components/bar-chart-mixed';
 import { ChartAreaInteractive } from '@/components/chart-area-interactive';
@@ -115,9 +116,19 @@ const applicationChartConfig = {
   },
 } satisfies ChartConfig;
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const jobsData = await getJobs();
   const jobSearchDateString = formatJobSearchDateString(jobSearchStartDate);
+
+  const welcomeText = `Welcome.
+
+I've been laid off for ${jobSearchDateString}. During this time, job searching has become my full-time job.
+
+I've been asked by many interviewers what I've done with my "free time," so I've created this dashboard to better answer that question.
+
+Bob Baxter`;
 
   return (
     <div className={styles.mainContainer}>
@@ -125,17 +136,12 @@ export default async function Home() {
         <CardHeader>
           <CardDescription className="p-2">
             <p>
-              Welcome.
-              <br />
-              <br />
-              I've been laid off for {jobSearchDateString}. During this time, job searching has become my full-time job.
-              <br />
-              <br />
-              I've been asked by many interviewers what I've done with my "free time," so I've created this dashboard to
-              better answer that question.
-              <br />
-              <br />
-              Bob Baxter
+              {welcomeText.split('\n').map((line, index, lines) => (
+                <React.Fragment key={index}>
+                  {line}
+                  {index < lines.length - 1 && <br />}
+                </React.Fragment>
+              ))}
             </p>
             <div className="flex flex-row gap-2">
               <a href="https://www.linkedin.com/in/bob-e-baxter/" target="_blank" rel="noopener noreferrer">
