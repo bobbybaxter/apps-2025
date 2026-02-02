@@ -25,7 +25,8 @@ export default function CompaniesInterviewed({
 }) {
   const titleRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [fontSizeClass, setFontSizeClass] = useState('text-5xl');
+  const [fontSizeClass, setFontSizeClass] = useState('text-lg');
+  const [isFontSizeCalculated, setIsFontSizeCalculated] = useState(false);
 
   useEffect(() => {
     const adjustFontSize = () => {
@@ -72,6 +73,7 @@ export default function CompaniesInterviewed({
       document.body.removeChild(measureEl);
 
       setFontSizeClass(selectedSize);
+      setIsFontSizeCalculated(true);
     };
 
     let resizeObserver: ResizeObserver | null = null;
@@ -109,7 +111,9 @@ export default function CompaniesInterviewed({
         <CardHeader>
           <CardDescription className={styles.cardDescription}>{title}</CardDescription>
           <CardTitle className={`${styles.cardTitleBase} ${fontSizeClass}`}>
-            <span ref={titleRef}>{value}</span>
+            <span ref={titleRef} style={{ opacity: isFontSizeCalculated ? 1 : 0, transition: 'opacity 0.2s' }}>
+              {value}
+            </span>
           </CardTitle>
         </CardHeader>
         <CardFooter className={styles.cardFooter}>

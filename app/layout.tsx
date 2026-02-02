@@ -18,7 +18,8 @@ config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: 'Job Search Analytics Dashboard | Bob Baxter',
-  description: 'A comprehensive, data-driven dashboard tracking job search metrics, interview performance, and hiring pipeline statistics. Built to demonstrate technical skills and provide transparency into the job search process.',
+  description:
+    'A comprehensive, data-driven dashboard tracking job search metrics, interview performance, and hiring pipeline statistics. Built to demonstrate technical skills and provide transparency into the job search process.',
   keywords: ['job search', 'analytics', 'dashboard', 'interview metrics', 'job applications', 'data visualization'],
   openGraph: {
     title: 'Job Search Analytics Dashboard | Bob Baxter',
