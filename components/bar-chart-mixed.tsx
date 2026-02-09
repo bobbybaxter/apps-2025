@@ -45,6 +45,7 @@ export function ChartBarMixed({
               barCategoryGap="5%"
               margin={{
                 left: 65,
+                right: 20,
               }}
             >
               <YAxis
