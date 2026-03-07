@@ -58,6 +58,10 @@ const applicationChartConfig = {
     label: 'Tech Interview 2',
     color: 'var(--color-blue-500)',
   },
+  techInterview3: {
+    label: 'Tech Interview 3',
+    color: 'var(--color-blue-500)',
+  },
   techInterviews: {
     label: 'Tech Interviews',
     color: 'var(--color-blue-600)',

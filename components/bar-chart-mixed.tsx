@@ -36,7 +36,11 @@ export function ChartBarMixed({
           {description && <CardDescription>{description}</CardDescription>}
         </CardHeader>
         <CardContent>
-          <ChartContainer config={chartConfig} className="[&_*]:outline-none [&_*]:focus:outline-none h-[300px] w-full">
+          <ChartContainer
+            id={`bar-${title.toLowerCase().replace(/\s+/g, '-')}`}
+            config={chartConfig}
+            className="[&_*]:outline-none [&_*]:focus:outline-none h-[300px] w-full"
+          >
             <BarChart
               responsive
               accessibilityLayer

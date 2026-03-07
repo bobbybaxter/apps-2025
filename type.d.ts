@@ -16,6 +16,7 @@ export type Application = {
   managerScreen: string | null;
   techInterview1: string | null;
   techInterview2: string | null;
+  techInterview3: string | null;
   panel: string | null;
   ceo: string | null;
   offer: string | null;
@@ -23,6 +24,7 @@ export type Application = {
   managerScreenTime: string | null;
   techInterview1Time: string | null;
   techInterview2Time: string | null;
+  techInterview3Time: string | null;
   panelTime: string | null;
   ceoTime: string | null;
 };

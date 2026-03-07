@@ -7,6 +7,7 @@ export function getAverageAutoRejectionResponseTime(applications: Application[])
       application.managerScreen === null &&
       application.techInterview1 === null &&
       application.techInterview2 === null &&
+      application.techInterview3 === null &&
       application.panel === null &&
       application.ceo === null,
   );

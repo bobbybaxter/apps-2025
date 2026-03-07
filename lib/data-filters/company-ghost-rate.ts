@@ -19,6 +19,7 @@ export function getCompanyGhostRate(applications: Application[]): {
     'managerScreenTime',
     'techInterview1Time',
     'techInterview2Time',
+    'techInterview3Time',
     'panelTime',
     'ceoTime',
   ] as const;

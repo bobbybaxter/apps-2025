@@ -1,25 +1,39 @@
 import type { Application } from '../../type';
 
+function isValidDate(dateStr: string): boolean {
+  const parsed = new Date(dateStr);
+  return !isNaN(parsed.getTime());
+}
+
 export function getApplicationDataOverTime(applications: Application[]) {
   const allDates = new Set<string>();
 
   applications.forEach((app) => {
-    if (app.applied && typeof app.applied === 'string') {
+    if (app.applied && typeof app.applied === 'string' && isValidDate(app.applied)) {
       allDates.add(app.applied);
     }
   });
 
   applications.forEach((app) => {
-    if (app.out && typeof app.out === 'string') {
+    if (app.out && typeof app.out === 'string' && isValidDate(app.out)) {
       allDates.add(app.out);
     }
   });
 
-  const interviewFields = ['recruiterScreen', 'managerScreen', 'techInterview1', 'techInterview2', 'panel', 'ceo'];
+  const interviewFields = [
+    'recruiterScreen',
+    'managerScreen',
+    'techInterview1',
+    'techInterview2',
+    'techInterview3',
+    'panel',
+    'ceo',
+  ];
   applications.forEach((app) => {
     interviewFields.forEach((field) => {
-      if (app[field as keyof Application] && typeof app[field as keyof Application] === 'string') {
-        allDates.add(String(app[field as keyof Application]));
+      const value = app[field as keyof Application];
+      if (value && typeof value === 'string' && isValidDate(value)) {
+        allDates.add(value);
       }
     });
   });
