@@ -28,6 +28,7 @@ export default function PieChartCard({
       <Card className={styles.card}>
         <CardContent>
           <ChartContainer
+            id={`pie-${title.toLowerCase().replace(/\s+/g, '-')}`}
             config={chartConfig}
             className="mx-auto aspect-square h-[150px] w-[150px] min-[400px]:h-[167px] min-[400px]:w-[167px]"
           >
