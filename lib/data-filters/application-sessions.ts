@@ -5,8 +5,7 @@ export function getApplicationSessions(applications: Application[]) {
     recruiterScreen: 'Recruiter Screens',
     managerScreen: 'Manager Screens',
     techInterviews: 'Tech Interviews',
-    panel: 'Panels',
-    ceo: 'CEO Interviews',
+    finalRounds: 'Final Rounds',
   };
 
   const sessionTypes = [
@@ -70,7 +69,9 @@ export function getApplicationSessions(applications: Application[]) {
         const aggregatedType =
           sessionType === 'techInterview1' || sessionType === 'techInterview2' || sessionType === 'techInterview3'
             ? 'techInterviews'
-            : sessionType;
+            : sessionType === 'panel' || sessionType === 'ceo'
+              ? 'finalRounds'
+              : sessionType;
 
         if (!sessionTypeMinutes[aggregatedType]) {
           sessionTypeMinutes[aggregatedType] = 0;
@@ -80,7 +81,7 @@ export function getApplicationSessions(applications: Application[]) {
     }
   }
 
-  const displayTypes = ['recruiterScreen', 'managerScreen', 'techInterviews', 'panel', 'ceo'];
+  const displayTypes = ['recruiterScreen', 'managerScreen', 'techInterviews', 'finalRounds'];
   const applicationSessionTimes = displayTypes
     .filter((type) => sessionTypeMinutes[type] && sessionTypeMinutes[type] > 0)
     .map((type) => {
