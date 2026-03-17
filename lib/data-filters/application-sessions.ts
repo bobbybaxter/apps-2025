@@ -55,14 +55,27 @@ export function getApplicationSessions(applications: Application[]) {
 
   for (const application of applications) {
     for (const sessionType of sessionTypes) {
-      if (
-        application[sessionType as keyof Application] !== null &&
-        application[sessionType as keyof Application] !== undefined &&
-        application[sessionType as keyof Application] !== ''
-      ) {
+      const timeField = timeFieldMap[sessionType];
+      const sessionValue = application[sessionType as keyof Application];
+      const timeValue = application[timeField] as string | null;
+      const hasSessionValue = sessionValue !== null && sessionValue !== undefined && sessionValue !== '';
+      const hasTimeValue = timeValue !== null && timeValue !== undefined && timeValue !== '';
+
+      if (hasSessionValue && !hasTimeValue) {
+        console.log(
+          `Session/time mismatch: application has ${sessionType} but missing ${String(timeField)}`,
+          application,
+        );
+      }
+      if (!hasSessionValue && hasTimeValue) {
+        console.log(
+          `Session/time mismatch: application has ${String(timeField)} but missing ${sessionType}`,
+          application,
+        );
+      }
+
+      if (hasSessionValue) {
         totalSessionsCount++;
-        const timeField = timeFieldMap[sessionType];
-        const timeValue = application[timeField] as string | null;
         const timeMinutes = timeValue ? parseFloat(timeValue) || 0 : 0;
         totalMinutes += timeMinutes;
 
